@@ -1,0 +1,83 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{problem}{Problem}[section]
+
+%\newcommand\Solution{%
+%  \textbf{Solution:}\\%
+%}
+\begin{document}
+
+\title{Project Euler Problem 190}
+\date{Aug 2022}
+\author{}
+\maketitle
+
+\textbf{Problem 190:} Let $S_m = \left(x_1, x_2,\ldots, x_m \right)$ be the $m$-tuple of positive real numbers with $x_1 + x_2 + \ldots + x_m = m$ for which $P_m = x_1 \cdot x_2^2 \cdot \ldots \cdot x_m^m = m$ is maximised. For example, it can be verified that $\left[ P_{10} \right] = 4112$ ( [ ] is the integer part function). Find $\sum \left[ P_m \right]$ for $2 \leq m \leq 15$.
+
+\begin{proof}
+We are looking to maximize the multivariate function
+
+\begin{equation*}
+f_m (x_1,x_2,\cdots,x_m) = x_1 x_2^2\cdot \ldots \cdot x_m^m
+\end{equation*}
+
+subject to the constraint function 
+
+\begin{align*}
+x_1 + x_2 + \ldots +x_m = m \Rightarrow &\\
+x_1 + x_2 + \ldots x_m - m = 0 \Rightarrow &\\
+g(x_1,x_2,\ldots,x_m) = 0
+\end{align*}
+
+We use the method of \textit{Lagrange Multipliers} for extrema under constraints:
+
+\begin{proposition}
+Let $U$ be an open subset of $\mathbb{R^n}$ and $f,g: U \rightarrow \mathbb{R^n}$ be $C^{1}$ functions.
+If $x_0$ is a local extrema of $f$ subject to $g(x) = K$ with $\nabla g(x_0) \not\equiv 0$ then there exists $\lambda_0 \not\equiv 0$ (called a Lagrange multiplier) such that: $\nabla f(x_0) = \lambda_0 \nabla g(x_0)$.
+\end{proposition}
+
+The Method of Lagrange Multipliers allows us to first solve the following system of equations $\nabla f(x) = \lambda \nabla g(x)$, $g(x) - K = 0$, then plug in all solutions into $f$ to identify the minimum and maximum values.
+
+\begin{equation*}
+\nabla f(x_1,\ldots,x_m) = (x_2^2x_3^3 \ldots x_m^m,2x_1x_2x_3^3 \ldots x_m^m, \ldots,mx_1x_2^2 \ldots x_m^{m-1}))
+\end{equation*}
+
+and 
+
+\begin{equation*}
+\nabla g(x_1,\ldots,x_m) = \left(1,1,\ldots,1 \right)
+\end{equation*}
+
+
+\begin{align*}
+\lambda_0 = mx_1x_2^2\ldots x_m^{m-1} \Rightarrow &\\
+\lambda_0 = \frac{mx_1x_2^2\ldots x_m^{m}}{x_m} \Rightarrow &\\
+\lambda_0 = \frac{mf(x_1,\ldots,x_m)}{x_m} \Rightarrow &\\
+x_m = \frac{mf(x_1,\ldots,x_m)}{\lambda_0}
+\end{align*}
+
+So $\displaystyle x_k = \frac{kf(x_1,\ldots,x_m)}{\lambda_0} = kx_1$ for $1 \leq k \leq m$. Hence 
+
+\begin{align*}
+g(x_1,\ldots,x_m) = 0 \Rightarrow &\\
+\sum_{i=1}^{m} x_i -m = 0 \Rightarrow &\\
+x_1 + 2x_1 + \ldots mx_1 - m = 0 \Rightarrow &\\
+x_1 \frac{m(m+1)}{2} - m = 0 \Rightarrow  &\\
+x_1 = \frac{2}{m+1}
+\end{align*}
+
+So for any $\displaystyle j=1,\ldots,m: x_j = \frac{2j}{m+1}$. Taking the product and the floor function for $P_m$ we now have that
+
+$$\left[ P_m \right] = \left[ \prod_{i=1,\ldots,m} \left( \frac{2k}{m+1}\right)^k \right]$$
+ 
+Summing through $m=2,\ldots,15$ we obtain the solution.
+
+\end{proof}
+
+
+\end{document}
