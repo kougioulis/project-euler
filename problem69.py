@@ -4,14 +4,14 @@ from sympy import primefactors
 
 #generate a boolean list of the first n natural numbers
 #to check whether a number k is prime using a sieve,
-#by only accesing the list, instead of searching the 
-#list of all primes
+#by only accesing the list(O(1) time), instead of searching the 
+#list of all primes (O(n) time)
 
 def sieve(n):
     sieve_list = [True]*(n+1)
     sieve_list[0] = sieve_list[1] = False
 
-    for i in range(int(n**0.5 + 1)):
+    for i in range(int(n**0.5 + 1)): #i^2 < n
         if sieve_list[i] == True:
             for j in range(i*i, len(sieve_list), i):
                 sieve_list[j] = False
