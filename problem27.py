@@ -1,20 +1,7 @@
 import math
 import sympy
 
-
-def sieve(n):
-    sieve_list = [True]*n #boolean list of length n to keep track of the sieve
-    for i in range(2, int(n**0.5 + 1)):
-        if sieve_list[i] == True:
-            for j in range(i*i, n, i): #start crossing out from the sieve
-                sieve_list[j] = False
-
-    final = []
-    for i in range(2, n):
-        if sieve_list[i] ==True: #if not crossed out then prime
-            final.append(i)
-    return final
-
+#TODO: use prime sieve list instead of sympy's isprime function (like Problem 69)
 max_num = 1
 max_prod = 1
 
