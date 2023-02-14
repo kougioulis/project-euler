@@ -13,8 +13,8 @@ eulercoins = [1504170715041707, 8912517754604,
 
 #second final eulercoin is 1, obtained by multiplying with 
 #the inverse of 1504170715041707 mod 4503599627370517
-
 a_minus = pow(1504170715041707, -1, 4503599627370517)
+
 n = 2
 while True:
     e = 1
