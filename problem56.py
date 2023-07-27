@@ -1,10 +1,11 @@
-maximum = -1
+#Project Euler Problem 56 - Powerful digit sum
 
-for a in range(2,100):
-    for b in range(2,100):
-        exp = str(a**b)
-        digit_sum = sum(int(digit) for digit in str(exp))
-        if digit_sum > maximum:
-            maximum = digit_sum
+import time
 
-print("Maximum digit sum:",maximum)
+tic = time.time()
+
+print("Maximum Digit Sum:",max(sum(int(digit) for digit in str(a**b)) for a in range(90,100) for b in range(90,100)))
+      
+tac = time.time()
+
+print("Elapsed time: %.2f seconds" % (tac-tic))

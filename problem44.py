@@ -1,33 +1,33 @@
+#Project Euler Problem 44 - Pentagon Numbers
+
+import time
+
+tic = time.time()
+
 def pentagonal(n):
-    return n*(3*n -1)//2
+    return n * (3 * n - 1) // 2
 
-#since P_n = n(3n -1)/2 it is adequate to check whether 
-#sqrt(24 P_n) +1) +1)//6 is a natural number
 def is_pentagonal(n):
-    k = ((24*n+1)**0.5 +1)/6
-    return k.is_integer()
+    return ((24 * n + 1) ** 0.5 + 1) % 6 == 0
 
-def first_n_pentagonals(n):
-    pentagonals = [];
-    for n in range(1,N+1):
-        pentagonals.append(n*(3*n -1)//2)
-    return pentagonals[0:N]
+D = float('inf')
 
-tmp=-1
-minimum=500000000
-index_j=-1
-index_k=-1
+i = 1
+while True:
+    pent_i = pentagonal(i)
+    for j in range(i - 1, 0, -1):
+        pent_j = pentagonal(j)
+        diff = pent_i - pent_j
+        if diff >= D:
+            break
+        if is_pentagonal(diff) and is_pentagonal(pent_i + pent_j):
+            D = diff
+            break
+    else:
+        i += 1
+        continue
+    break
+print("Minimum difference:", D)
 
-for j in range(1,5000):
-    for k in range(2,5000):
-        if is_pentagonal(pentagonal(j) + pentagonal(k)):
-                if is_pentagonal(abs(pentagonal(k) - pentagonal(j))):
-                    D = abs(pentagonal(j) - pentagonal(k))
-                    if D < minimum:
-                        minimum = D
-                        index_j = j
-                        index_k = k
-
-print("P_j: ",pentagonal(j))
-print("P_k: ",pentagonal(k))
-print("Minimum value of D: ",minimum)
+tac = time.time()
+print("Elapsed time: %.2f seconds" % (tac - tic))
