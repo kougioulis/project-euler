@@ -28,7 +28,7 @@ for j in range(1, cols):
         #move up
         T[i, j] = min(T[i, j], T[i + 1, j] + matrix[i, j])
 
-#minimum of the last column
+#minimum of the last column as we can finish in any cell in the last column
 min_path_sum = min(T[i, cols - 1] for i in range(rows))
 
 print(min_path_sum)
