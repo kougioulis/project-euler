@@ -36,7 +36,7 @@ community_chest_cards = [00]*16
 community_chest_cards[0] = 00  # Go
 community_chest_cards[1] = 10  # Jail
 
-# Put the community chest cards in a queue to simulate the deck
+#put the community chest cards in a queue to simulate the deck
 community_chest_cards_queue = community_chest_cards.copy()
 
 chance_cards = [00]*16
@@ -82,7 +82,7 @@ for i in range(N):
             if card != 0:
                 current_position = card
             visit_count[current_position] += 1
-            community_chest_cards_queue.append(card)
+            community_chest_cards_queue.append(card) #place card at the bottom of the deck
         elif current_position in [7, 22, 36]: #chance card
             card = chance_cards_queue.pop(0)
             if card != 0:
