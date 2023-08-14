@@ -2,7 +2,7 @@
 
 import time 
 
-from constraint import Problem, BacktrackingSolver, AllDifferentConstraint
+from constraint import Problem, BacktrackingSolver, AllDifferentConstraint #pip install python-constraint
 
 tic = time.time()
 
@@ -27,17 +27,17 @@ class Problem96:
         cols, rows = range(9), range(9)
         nums = range(1, 10)
 
-        #specify the variables and their domains
-        for i in cols:
-            for j in rows:
+        #specify the variables and their domains on the CSP
+        for i in rows:
+            for j in cols:
                 problem.addVariable((i, j), nums if puzzle[i][j] == 0 else [puzzle[i][j]])
 
         #add the constraints
-        for i in cols:
-            problem.addConstraint(AllDifferentConstraint(), [(i, j) for j in rows])
+        for i in rows:
+            problem.addConstraint(AllDifferentConstraint(), [(i, j) for j in cols])
 
-        for j in rows:
-            problem.addConstraint(AllDifferentConstraint(), [(i, j) for i in cols])
+        for j in cols:
+            problem.addConstraint(AllDifferentConstraint(), [(i, j) for i in rows])
 
         for i in range(0, 9, 3):
             for j in range(0, 9, 3):
